@@ -57,6 +57,7 @@ export function SyncPage() {
             value={usingFallback ? t('storageFallback') : 'IndexedDB'}
             ok={!usingFallback}
           />
+          <Row label={t('buildLabel')} value={String(__BUILD_ID__)} ok />
           {usingFallback ? (
             <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-[13px] leading-relaxed text-amber-800">
               {t('fallbackWarning')}

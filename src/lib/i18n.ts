@@ -151,6 +151,7 @@ const zh = {
   lastSuccess: '最后成功',
   never: '还没有过',
   storage: '本机储存',
+  buildLabel: '版本',
   storageFallback: 'localStorage(后备)',
   fallbackWarning:
     '这台手机的 IndexedDB 用不了(可能是无痕模式或浏览器设定),已经退到 localStorage。资料还是存得住,但容量小很多,请尽快保存并同步。',
@@ -286,6 +287,7 @@ const en: Dict = {
   lastSuccess: 'Last success',
   never: 'Never',
   storage: 'Local storage',
+  buildLabel: 'Build',
   storageFallback: 'localStorage (fallback)',
   fallbackWarning:
     'IndexedDB is unavailable on this phone (private mode or a browser setting), so we fell back to localStorage. Data is still stored, but capacity is much smaller — save and sync soon.',

@@ -5,8 +5,12 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // base 用相对路径:不管这个 repo 叫什么名字、部署在 GitHub Pages 的哪个子路径,
 // 都不需要改这个档案。HashRouter 负责路由,所以也不会有 404 问题。
+const BUILD_ID = new Date().toISOString().slice(0, 16).replace('T', ' ') + " UTC"
+
 export default defineConfig({
   base: './',
+  // 注入建置时间,画面上看得到设备跑的是哪一版
+  define: { __BUILD_ID__: JSON.stringify(BUILD_ID) },
   plugins: [
     react(),
     tailwindcss(),
