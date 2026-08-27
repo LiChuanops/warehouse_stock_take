@@ -254,7 +254,7 @@ function describeError(err: unknown): string {
     return `请求被拒绝 / Request rejected (HTTP ${err.status})`
   }
   if (err instanceof DOMException && err.name === 'AbortError') {
-    return `等了 ${Math.round(REQUEST_TIMEOUT_MS / 1000)} 秒没有回应,网络太慢 / No response after ${Math.round(REQUEST_TIMEOUT_MS / 1000)}s — network too slow`
+    return `等了 ${Math.round(REQUEST_TIMEOUT_MS / 1000)} 秒,Google 那边没有回应 / No response from Google after ${Math.round(REQUEST_TIMEOUT_MS / 1000)}s`
   }
   if (err instanceof TypeError) return '送不出去,连不上网络 / Could not reach the network'
   if (err instanceof Error) return err.message

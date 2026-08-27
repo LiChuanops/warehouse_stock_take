@@ -32,11 +32,25 @@ export function getRoom(id: string | undefined): RoomConfig | undefined {
   return ROOMS.find((r) => r.id === id)
 }
 
-/** 送不出去时的重试间隔(毫秒)。最后一档会一直沿用。 */
-export const RETRY_BACKOFF_MS = [3_000, 8_000, 20_000, 60_000, 180_000, 600_000]
+/**
+ * 送不出去时的重试间隔(毫秒)。最后一档会一直沿用。
+ *
+ * 第一步不能太短:客户端放弃之后,Apps Script 那边其实还在跑、还握着锁。
+ * 马上重试只会卡在锁上,等于自己堵自己。
+ */
+export const RETRY_BACKOFF_MS = [10_000, 30_000, 60_000, 180_000, 600_000]
 
-/** 单次提交的逾时。冷房网络差,给宽一点,但不能无限等。 */
-export const REQUEST_TIMEOUT_MS = 30_000
+/**
+ * 单次提交的逾时。
+ *
+ * Apps Script 冷启动实测要 12 秒(而且那还只是一支什么都不做的 doGet),
+ * 热了之后大约 1.5 秒。加上开试算表、写入、再打一次 Supabase,
+ * 冷的时候超过 30 秒很正常 —— 所以给到 90 秒。
+ *
+ * 等久一点不影响使用者:保存是本机操作,早就回「已保存」了,
+ * 这个逾时只关系到背景同步。
+ */
+export const REQUEST_TIMEOUT_MS = 90_000
 
 /** 背景同步的巡逻间隔。 */
 export const SYNC_POLL_MS = 20_000
